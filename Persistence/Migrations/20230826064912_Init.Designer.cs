@@ -11,7 +11,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230826043010_Init")]
+    [Migration("20230826064912_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -26,7 +26,7 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Cateogry")
+                    b.Property<string>("Category")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
