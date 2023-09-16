@@ -8,6 +8,7 @@ using Persistence;
 
 namespace API;
 
+[AllowAnonymous]
 public class ActivitiesController : BaseApiController
 {
     [HttpGet]

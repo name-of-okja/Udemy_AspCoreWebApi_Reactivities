@@ -18,7 +18,7 @@ public class Seed
 
             foreach (var user in users)
             {
-                await userManager.CreateAsync(user, "Password123!");
+                await userManager.CreateAsync(user, "Pa$$w0rd");
             }
         }
 
