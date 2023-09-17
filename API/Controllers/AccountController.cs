@@ -1,11 +1,13 @@
 ﻿using System.Security.Claims;
+using API.DTOs;
+using API.Services;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API;
+namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -42,7 +44,7 @@ public class AccountController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-        if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
+        if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
         {
             ModelState.AddModelError("username", "User Name is already taken");
             return ValidationProblem();
@@ -58,7 +60,7 @@ public class AccountController : ControllerBase
         {
             DisplayName = registerDto.DisplayName,
             Email = registerDto.Email,
-            UserName = registerDto.UserName
+            UserName = registerDto.Username
         };
 
         var result = await _userManager.CreateAsync(user, registerDto.Password);
@@ -87,7 +89,7 @@ public class AccountController : ControllerBase
             DisplayName = user.DisplayName,
             Image = null,
             Token = _tokenService.CreateToken(user),
-            UserName = user.UserName
+            Username = user.UserName
         };
     }
 }

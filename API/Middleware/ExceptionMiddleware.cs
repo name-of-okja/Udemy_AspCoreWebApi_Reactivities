@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Text.Json;
-using Application;
+using Application.Core;
 
-namespace API;
+namespace API.Middleware;
 
 public class ExceptionMiddleware
 {

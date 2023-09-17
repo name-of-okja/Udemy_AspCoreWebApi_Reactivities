@@ -1,8 +1,8 @@
-﻿using Application;
+﻿using Application.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API;
+namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

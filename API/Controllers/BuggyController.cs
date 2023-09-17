@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace API;
+namespace API.Controllers;
 
 public class BuggyController : BaseApiController
 {

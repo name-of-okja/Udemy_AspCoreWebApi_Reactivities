@@ -1,10 +1,11 @@
-﻿using AutoMapper;
+﻿using Application.Core;
+using AutoMapper;
 using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application;
+namespace Application.Activities;
 
 public class Edit
 {

@@ -1,7 +1,8 @@
-﻿using MediatR;
+﻿using Application.Core;
+using MediatR;
 using Persistence;
 
-namespace Application;
+namespace Application.Activities;
 
 public class Delete
 {

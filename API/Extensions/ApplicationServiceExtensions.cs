@@ -1,11 +1,14 @@
-﻿using Application;
+﻿using Application.Activities;
+using Application.Core;
+using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace API;
+namespace API.Extensions;
 
 public static class ApplicationServiceExtensions
 {
@@ -30,6 +33,8 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddFluentValidationAutoValidation();
         services.AddValidatorsFromAssemblyContaining<Create>();
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserAccessor, UserAccessor>();
 
         return services;
     }
