@@ -32,7 +32,7 @@ function ActivityDetails() {
         <ActivityDetailedChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <ActivityDetailedSidebard />
+        <ActivityDetailedSidebard activity={activity} />
       </Grid.Column>
     </Grid>
   );

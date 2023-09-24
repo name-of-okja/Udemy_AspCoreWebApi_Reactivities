@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { Activity } from '../../../app/models/activity';
+import { ActivityFormValues } from '../../../app/models/activity';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { v4 as uuid } from 'uuid';
 import { Formik, Form } from 'formik';
@@ -17,18 +17,10 @@ import MyDateInput from '../../../app/common/form/MyDateInput';
 
 function ActivityForm() {
   const { activityStore } = useStore();
-  const { createActivity, updateActivity, loading, loadActivity, loadingInital } = activityStore;
+  const { createActivity, updateActivity, loadActivity, loadingInital } = activityStore;
   const { id } = useParams();
   const navigate = useNavigate();
-  const [activity, setActivity] = useState<Activity>({
-    id: '',
-    title: '',
-    category: '',
-    description: '',
-    date: null,
-    city: '',
-    venue: '',
-  });
+  const [activity, setActivity] = useState<ActivityFormValues>(new ActivityFormValues());
 
   const validationSchema = Yup.object({
     title: Yup.string().required('The Activity Title is Required'),
@@ -40,12 +32,12 @@ function ActivityForm() {
   });
   useEffect(() => {
     if (id) {
-      loadActivity(id).then((activity) => setActivity(activity!));
+      loadActivity(id).then((activity) => setActivity(new ActivityFormValues(activity)));
     }
   }, [id, loadActivity]);
 
-  function handleFormSubmit(activity: Activity) {
-    if (activity.id.length === 0) {
+  function handleFormSubmit(activity: ActivityFormValues) {
+    if (!activity.id) {
       let newActivity = {
         ...activity,
         id: uuid(),
@@ -85,7 +77,7 @@ function ActivityForm() {
             <MyTextInput placeholder='Venue' name='venue' />
             <Button
               disabled={isSubmitting || !dirty || !isValid}
-              loading={loading}
+              loading={isSubmitting}
               floated='right'
               positive
               type='submit'
