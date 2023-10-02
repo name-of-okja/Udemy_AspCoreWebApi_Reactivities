@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { Profile } from '../../app/models/profile';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import FollowButton from './FollowButton';
 
 interface Props {
   profile: Profile;
@@ -10,7 +11,7 @@ interface Props {
 function ProfileCard({ profile }: Props) {
   function truncate(str: string | undefined) {
     if (str) {
-      return str.length > 40 ? str.substring(0, 37) + '...' : str;
+      return str.length > 25 ? str.substring(0, 22) + '...' : str;
     }
   }
   return (
@@ -21,8 +22,9 @@ function ProfileCard({ profile }: Props) {
         <Card.Description>{truncate(profile.bio)}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Icon name='user' /> 20 followers
+        <Icon name='user' /> {profile.followersCount} followers
       </Card.Content>
+      <FollowButton profile={profile} />
     </Card>
   );
 }
