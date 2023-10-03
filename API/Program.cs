@@ -37,12 +37,17 @@ app.UseCors("CorsPolicy");
 //app.UseHttpsRedirection();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
+
+// Client
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapControllers();
 // SignalR
 app.MapHub<ChatHub>("/chat");
+// Client
+app.MapFallbackToController("Index", "Fallback");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
