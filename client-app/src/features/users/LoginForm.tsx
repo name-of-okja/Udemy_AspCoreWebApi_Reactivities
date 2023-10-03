@@ -10,7 +10,7 @@ function LoginForm() {
     <Formik
       initialValues={{ email: '', password: '', error: null }}
       onSubmit={(values, { setErrors }) =>
-        userStore.login(values).catch((error) => setErrors({ error: 'Invalid email or Password' }))
+        userStore.login(values).catch(() => setErrors({ error: 'Invalid email or Password' }))
       }
     >
       {({ handleSubmit, isSubmitting, errors }) => (

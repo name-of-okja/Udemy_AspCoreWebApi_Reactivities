@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Button, Header, Segment } from 'semantic-ui-react';
 import { useState } from 'react';
 import { useStore } from '../../../app/stores/store';
@@ -38,7 +38,7 @@ function ActivityForm() {
 
   function handleFormSubmit(activity: ActivityFormValues) {
     if (!activity.id) {
-      let newActivity = {
+      const newActivity = {
         ...activity,
         id: uuid(),
       };

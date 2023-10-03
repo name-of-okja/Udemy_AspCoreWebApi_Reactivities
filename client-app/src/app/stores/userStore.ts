@@ -15,19 +15,29 @@ export default class UserStore {
   }
 
   login = async (creds: UserFormValues) => {
-    const user = await agent.Account.login(creds);
-    store.commonStore.setToken(user.token);
-    runInAction(() => (this.user = user));
-    router.navigate('/activities');
-    store.modalStore.closeModal();
+    try {
+      const user = await agent.Account.login(creds);
+      store.commonStore.setToken(user.token);
+      runInAction(() => (this.user = user));
+      router.navigate('/activities');
+      store.modalStore.closeModal();
+    } catch (error) {
+      console.log('Login Error - ', error);
+      throw error;
+    }
   };
 
   register = async (creds: UserFormValues) => {
-    const user = await agent.Account.register(creds);
-    store.commonStore.setToken(user.token);
-    runInAction(() => (this.user = user));
-    router.navigate('/activities');
-    store.modalStore.closeModal();
+    try {
+      const user = await agent.Account.register(creds);
+      store.commonStore.setToken(user.token);
+      runInAction(() => (this.user = user));
+      router.navigate('/activities');
+      store.modalStore.closeModal();
+    } catch (error) {
+      console.log('Register Error - ', error);
+      throw error;
+    }
   };
 
   logout = () => {
