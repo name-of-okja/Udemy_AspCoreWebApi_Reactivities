@@ -31,6 +31,8 @@ public static class IdentityServiceExtensions
                     IssuerSigningKey = key,
                     ValidateIssuer = false,
                     ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero,
                 };
                 // SignalR
                 opt.Events = new JwtBearerEvents
